@@ -7,17 +7,17 @@ import org.apache.spark.SparkConf
 import java.lang.Double
 
 
-class PageRank (appName: String, linksIn: Array[String], titlesIn: Array[String]) {
-    val name        : String = appName
-    val linksPaths  : Array[String] = linksIn
-    val titlesPaths : Array[String] = titlesIn
+class PageRank (appName: String, linksIn: String, titlesIn: String) {
+    val name       : String = appName
+    val linksPath  : String = linksIn
+    val titlesPath : String = titlesIn
 
     var conf: SparkConf    = new SparkConf().setAppName(name)   
     var sc  : SparkContext = new SparkContext(conf)
 
     def calculatePageRank(outputPath: String, iterations: Int, useTaxation: Boolean) {
-      val lines = sc.textFile(linksPaths(0))
-      val titles = sc.textFile(titlesPaths(0))
+      val lines = sc.textFile(linksPath)
+      val titles = sc.textFile(titlesPath)
 
       val zippedTitles = titles.zipWithIndex.map( x => (x._2.toInt + 1, x._1) )
       val links = lines.map{ s =>

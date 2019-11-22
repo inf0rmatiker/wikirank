@@ -8,11 +8,11 @@ import org.apache.spark.rdd.RDD
 import java.lang.Double
 
 
-class WikiBomb (termI: String, targetI: String, iLinks: Array[String], iTitles: Array[String], name: String) {
+class WikiBomb (termI: String, targetI: String, iLinks: String, iTitles: String, name: String) {
   var term = termI.toLowerCase()
   var target = targetI
-  var inputLinks = iLinks(0) 
-  var inputTitles = iTitles(0)
+  var inputLinks = iLinks 
+  var inputTitles = iTitles
   
   var conf: SparkConf    = new SparkConf().setAppName(name)   
   var sc  : SparkContext = new SparkContext(conf)
